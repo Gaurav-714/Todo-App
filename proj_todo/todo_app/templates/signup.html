@@ -15,19 +15,28 @@
 <body>
     <div class="signup-login">
         <div class="signup-box">
+            
             <form method="post">
                 {% csrf_token %}
                 <div class="heading">
                     SignUp
                 </div>
+
                 <div class="line"></div>
+
+                <div style="text-align: center; color: red">
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }}" role="alert">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+
                 <div class="field">
                     <b>Username</b>
                     <input class="inp" type="text" name="username" required placeholder="Enter Your Full Name">
-                </div>
-                <div class="field">
-                    <b>Email</b>
-                    <input class="inp" type="email" name="email" required placeholder="Enter Your Username">
                 </div>
                 <div class="field">
                     <b>Password</b>

@@ -21,6 +21,17 @@
                     SignIn
                 </div>
                 <div class="line"></div>
+
+                <div style="text-align: center; color: red">
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }}" role="alert">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+
                 <div class="field">
                     <b>Username</b>
                     <input class="inp" type="text" name="username" required placeholder="Enter Your Full Name">
