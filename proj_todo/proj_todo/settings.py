@@ -132,6 +132,6 @@ STATICFILES_DIRS = [
         os.path.join(BASE_DIR, 'proj_todo/static'),
         ]
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static_biuld', 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static_build', 'static')
 
 ALLOWED_HOSTS = ['.vercel.app', '.now.sh', '127.0.0.1']
