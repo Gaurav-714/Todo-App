@@ -21,7 +21,7 @@ def signup_page(request):
             user.save()
 
             messages.success(request, "*** Account Created ***")
-            return redirect('/signin/')
+            return redirect('/')
 
         except:
             messages.warning(request, "*** Something Went Wrong ***")
@@ -30,7 +30,7 @@ def signup_page(request):
     return render(request, 'signup.html')
 
 
-@login_required(login_url = '/signin/')
+@login_required(login_url = '/')
 def signin(request):
     if request.method == 'POST':
 
@@ -41,7 +41,7 @@ def signin(request):
             user = User.objects.filter(username = username)
             if not user.exists():
                 messages.warning(request, "*** Username Not Found ***")
-                return redirect('/signin/')
+                return redirect('/')
             
             user = authenticate(username = username, password = password)
             if user:
@@ -49,21 +49,21 @@ def signin(request):
                 return redirect('/todo/')
             else:
                 messages.warning(request, "*** Incorrect Password ***")
-                return redirect('/signin/')
+                return redirect('/')
         
         except:
             messages.warning(request, "*** Something Went Wrong ***")
-            return redirect('/signin/')
+            return redirect('/')
 
     return render(request, 'signin.html')
 
 
 def signout(request):
     logout(request)
-    return redirect('/signin/')
+    return redirect('/')
 
 
-@login_required(login_url = '/signin/')
+@login_required(login_url = '/')
 def todo(request):
     if request.method == 'POST':
         title = request.POST.get('title')
@@ -76,12 +76,12 @@ def todo(request):
     return render(request, 'todo.html', {'todos' : todos})
 
 
-@login_required(login_url = '/signin/')
+@login_required(login_url = '/')
 def update(request, srno):
     if request.method == 'POST':
 
         title = request.POST.get('title')
-        todos = Todo.objects.filter(user = request.user, srno = srno)
+        todos = Todo.objects.get(user = request.user, srno = srno)
         todos.title = title
         todos.save()
         return redirect('/todo/')
@@ -90,7 +90,7 @@ def update(request, srno):
     return render(request, 'update.html', {'todos' : todos})
 
 
-@login_required(login_url = '/signin/')
+@login_required(login_url = '/')
 def delete(request, srno):
     todos = Todo.objects.get(user = request.user, srno = srno)
     todos.delete()
