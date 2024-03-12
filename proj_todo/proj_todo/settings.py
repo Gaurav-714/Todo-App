@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-3!^_b$v&u6zps!et1w@90m-9k!&1p7ar!r4bt(dot_(h%xlr^u
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-###ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -73,12 +73,25 @@ WSGI_APPLICATION = 'proj_todo.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
+}
+"""
+
+import dj_database_url
+from decouple import config
+
+'''env_file = BASE_DIR / '.env'
+if env_file.exists():
+    config.read_dotenv(env_file)'''
+
+# Database configuration using dj_database_url
+DATABASES = {
+    'default': dj_database_url.config(default=config('DATABASE_URL'))
 }
 
 
@@ -124,15 +137,12 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-### Added...
-"""
 import os
 
+STATIC_URL = '/static/'
+
 STATICFILES_DIRS = [
-        os.path.join(BASE_DIR, 'proj_todo/static'),
+        os.path.join(BASE_DIR, 'public/static'),
         ]
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles build', 'static')
-
-ALLOWED_HOSTS = ['.vercel.app', '.now.sh', '127.0.0.1']
-"""
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')

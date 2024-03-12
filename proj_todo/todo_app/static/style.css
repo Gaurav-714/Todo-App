@@ -52,7 +52,7 @@ h2 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #ffff00a9;
+    background: #30e84bcc;
     color: #fff;
     padding: 0.75px 1px;
     border-radius: 5px;
@@ -104,12 +104,10 @@ a {
 
 .todo-green {
     background-color: rgb(67, 146, 67);
-    /* Add other styles as needed */
 }
 
 .todo-red {
     background-color: rgb(192, 43, 43);
-    /* Add other styles as needed */
 }
 
 .anca {

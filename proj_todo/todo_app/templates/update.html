@@ -28,32 +28,19 @@
                 <div class="heads">
                     <div class="ancaa" title=""><i class="fa-solid fa-user"></i></div>
                     <div class="heading">Get Things Done</div>
-                    <div class="anca"><a href="{% url 'signout' %}" class="sign"><i
-                                class="fa-solid fa-right-from-bracket"></i></a></div>
+                    <div class="anca"><a href="{% url 'signout' %}" class="sign"><i class="fa-solid fa-right-from-bracket"></i></a></div>
                 </div>
 
-                <form method="post">
+                <form action="/update/{{todo.srno}}" method="post">
                     {% csrf_token %}
-                    <input type="text" name="title" required class="todo-input" placeholder="Update Your Task" value="{{todos.title}}">
+                    <input type="text" name="title" required class="todo-input" value="{{todo.title}}">
+                    <br><input type="checkbox" name="status" style="align-content: center;"> Is completed ! 
                     <input class="submit-button" type="submit" value="Update  Task">
                 </form>
 
-                {% for todo in todos %}
-                <div class="Todo clickable-div {% if todo.status %}todo-green{% else %}todo-red{% endif %}">
-                    <p>{{ forloop.counter }}</p>
-                    <p>{{ todo.title }}</p>
-                    <div>
-                        <a href=""><i class="fa-solid fa-pen-to-square"></i></a>
-                        <a href=" /delete/{{todo.srno}} "><i class="fa-solid fa-trash"></i></a>
-                        </i>
-                    </div>
-                </div>
-                {% endfor %}
             </div>
         </div>
     </div>
-
-    <script src="{% static 'todo.js' %}"></script>
 
 </body>
 

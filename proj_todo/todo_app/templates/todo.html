@@ -37,9 +37,9 @@
                 </form>
                 
                 {% for todo in todos %}
-                <div class="Todo clickable-div {% if todo.status %}todo-green{% else %}todo-red{% endif %}">
-                    <p>{{ forloop.counter }}</p>
-                    <p class="{% if todo.status %} completed {% endif %} ">{{ todo.title }}</p>
+                <div class="Todo {% if todo.status %}todo-green{% else %}todo-green{% endif %}">
+                    <p>( {{ forloop.counter }} )</p>
+                    <p>{{ todo.title }}</p>
                     <div>
                         <a href=" /update/{{todo.srno}} "><i class="fa-solid fa-pen-to-square"></i></a>
                         <a href=" /delete/{{todo.srno}} "><i class="fa-solid fa-trash"></i></a>
@@ -51,8 +51,7 @@
         </div>
     </div>
 
-    <script src="{% static 'todo.js' %}"></script>
-
+    
 </body>
 
 </html>

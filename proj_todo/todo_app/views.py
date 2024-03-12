@@ -30,7 +30,6 @@ def signup_page(request):
     return render(request, 'signup.html')
 
 
-@login_required(login_url = '/')
 def signin(request):
     if request.method == 'POST':
 
@@ -69,6 +68,7 @@ def todo(request):
         title = request.POST.get('title')
         obj = Todo(title = title, user = request.user)
         obj.save()
+        
         todos = Todo.objects.filter(user = request.user).order_by('date')
         return redirect('/todo/', {'todos' : todos})
     
@@ -81,13 +81,15 @@ def update(request, srno):
     if request.method == 'POST':
 
         title = request.POST.get('title')
-        todos = Todo.objects.get(user = request.user, srno = srno)
-        todos.title = title
-        todos.save()
-        return redirect('/todo/')
+        status = request.POST.get('status')
+        todo = Todo.objects.get(user = request.user, srno = srno)
+        todo.title = title
+        todo.status = status
+        todo.save()
+        return redirect('/todo/', {'todo' : todo})
     
-    todos = Todo.objects.filter(user = request.user).order_by('date')
-    return render(request, 'update.html', {'todos' : todos})
+    todo = Todo.objects.filter(srno = srno).first()
+    return render(request, 'update.html', {'todo' : todo})
 
 
 @login_required(login_url = '/')
