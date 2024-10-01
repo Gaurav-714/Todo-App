@@ -74,9 +74,9 @@ import dj_database_url
 from decouple import config
 from dotenv import load_dotenv
 
-env_file = Path(BASE_DIR) / '.env'
-if env_file.exists():
-    load_dotenv(env_file)
+#env_file = Path(BASE_DIR) / '.env'
+#if env_file.exists():
+#    load_dotenv(env_file)
 
 # Database configuration using dj_database_url
 DATABASES = {
